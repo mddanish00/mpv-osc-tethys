@@ -2,6 +2,19 @@
 
 This theme replaces [the built in `osc.lua`](https://github.com/mpv-player/mpv/blob/master/player/lua/osc.lua) shipped with [mpv](https://github.com/mpv-player/mpv).
 
+## About this fork
+
+Basically same as the original + play button will actually play from start if the current playback is finished.
+
+I also add new key binding that will add same behavior to key that you use to play/pause video.
+
+This is because I use tethys with `keep-open=always` instead of `keep-open=yes` because I don't really want autoplay next video. 
+
+I want to chose myself if I want to go to next video. 
+
+
+The main motivation is I want to replay the video but I don't want to manually move the seekbar to start for that.
+  
 ![](https://i.imgur.com/cYqWlw5.png)
 
 Local files can show thumbnail previews (using a patched version of [mpv_thumbnail_script](https://github.com/TheAMM/mpv_thumbnail_script)).
@@ -39,13 +52,13 @@ Picture-In-Picture button to position in the corner, on top of other windows, an
 
 * `osc=no` will disable the default `osc.lua`
 * `border=no` will remove the window titlebar and frame. You can still drag a window by dragging the video.
-* `keep-open=yes` will keep the player open after the video has finished.
+* `keep-open=always` will keep the player open after the video has finished but without playing next video automatically. If you want that behaviour, better to use original.
 * `keepaspect-window=no` will allow black borders around the video when maximized or half screen.
 
 ```ini
 osc=no
 border=no
-keep-open=yes
+keep-open=always
 keepaspect-window=no
 ```
 
@@ -62,6 +75,7 @@ WHEEL_DOWN    seek -5 exact    # backward
 # Seek by exactly 30s instead of relative+keyframes 60s
 UP    seek  30 exact           # forward
 DOWN  seek -30 exact           # backward
+Space script-binding playpause # add same aaadjustment like play button
 ```
 
 (4) Close and reopen MPV to view the new Tethys theme!

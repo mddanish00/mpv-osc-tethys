@@ -4379,6 +4379,15 @@ function osc_init()
     --playpause
     ne = new_element("playpause", "button")
 
+    --custom_playpause
+    function playpause_function()
+        local percent_pos = tonumber(mp.get_property("percent-pos"))
+        if percent_pos >= 99.9 then
+            mp.commandv("seek", 0, "absolute")
+        end
+        mp.commandv("cycle", "pause") 
+    end
+
     ne.content = function ()
         if mp.get_property("pause") == "yes" then
             return tethysIcon_play
@@ -4386,9 +4395,11 @@ function osc_init()
             return tethysIcon_pause
         end
     end
-    ne.eventresponder["mbtn_left_up"] =
-        function () mp.commandv("cycle", "pause") end
+    ne.eventresponder["mbtn_left_up"] = playpause_function
 
+    --custom key binding to replace cycle pause
+    mp.add_key_binding(playpause_key, "playpause", playpause_function)
+    
     --skipback
     ne = new_element("skipback", "button")
 
